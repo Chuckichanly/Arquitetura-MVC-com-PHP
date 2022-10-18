@@ -37,10 +37,17 @@
     }
 
     public function run($url) {
-      echo "********".$url."********";
       foreach ($this->getRoutes() as $key => $route) {
-        print_r($route);
-        echo '<br><br><br><br><br>';
+
+        if($url == $route['route']){
+          $class = "App\\Controllers\\".ucfirst($route['controller']);
+  
+          $controller = new $class();
+  
+          $action = $route['action'];
+  
+          $controller->$action();
+        }
 
       }
     }
