@@ -2,13 +2,9 @@
 
 namespace App\Models;
 
-class Info{
+Use MF\Model\Model;
 
-  protected $db;
-
-  public function __construct(\PDO $db){
-    $this->db = $db;
-  }
+class Info extends Model{
 
   public function getInfo(){
     
