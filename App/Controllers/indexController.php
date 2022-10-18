@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
+//os recursos do miniframework
 use MF\Controller\Action;
-use App\Connection;
+use MF\Model\Container;
+
+//os models
 use App\Models\Produto;
+use App\Models\Info;
+
 
 class IndexController extends Action{
 
   public function index(){
-    // $this->view->dados = array('Sofá','Cadeira','Cama');
 
-    //instancia de conexao
-    $conn = Connection::getDb();
-
-    //instancia modelo
-    $produto = new Produto($conn);
+    $produto = Container::getModel('Produto');
 
     $produtos = $produto->getProdutos();
 
@@ -25,8 +25,13 @@ class IndexController extends Action{
   }
   
   public function sobreNos(){
-    // $this->view->dados = array('Notebook','Smartphone','Tablet');
-    $this->render('sobreNos', 'layout2');
+
+    $info = Container::getModel('Info');
+
+    $informacoes = $info->getInfo();
+    
+    $this->view->dados = $informacoes;
+    $this->render('sobreNos', 'layout1');
   }
 }
 
